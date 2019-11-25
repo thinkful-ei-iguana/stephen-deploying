@@ -20,7 +20,13 @@ export default class Form extends React.Component {
 
   render() {
     return (
-      <form className="search-form">
+      <form
+        className="search-form" 
+        onSubmit={(e) => {
+          e.preventDefault();
+          this.props.fetch(this.state.filter, this.state.term);
+        }}
+      >
         <label for="search-filter">Search for:</label>
         <select id="search-filter" name="search-filter" onChange={e => this.handleFilter(e.target.value)}>
           <option value="">Pick one</option>
@@ -33,6 +39,7 @@ export default class Form extends React.Component {
         </select>
         <label for="search-term">Search Term:</label>
         <input type="text" id ="search-term" name="search-term" placeholder="e.g. Anakin" onChange={e => this.handleTerm(e.target.value)} required/>
+        <button>Search</button>
       </form>
     )
   }
